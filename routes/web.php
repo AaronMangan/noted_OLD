@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/dashboard', function (Request $request) {
+    return view('dashboard', ['pages' => \Auth::user()->pages]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
