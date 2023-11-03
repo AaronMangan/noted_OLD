@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateNewPageRequest;
 
 class PageController extends Controller
 {
@@ -27,10 +28,17 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateNewPageRequest $request)
     {
         //
+        $data = $request->safe()->only(['title', 'content']);
+        $data['user_id'] = $request->user()->id;
+        $data['content'] = $data['content'];
 
+        $saved = Page::create($data);
+
+        $request->session()->flash('status', ($saved) ? 'success' : 'fail');
+        return redirect('dashboard');
     }
 
     /**
