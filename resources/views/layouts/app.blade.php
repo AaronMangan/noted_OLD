@@ -15,7 +15,6 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @notifyCss
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-white dark:bg-gray-900">
@@ -26,7 +25,5 @@
                 {{ $slot }}
             </main>
         </div>
-        <x-notify::notify />
-        @notifyJs
     </body>
 </html>

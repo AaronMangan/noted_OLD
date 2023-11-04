@@ -42,7 +42,13 @@ return [
             'type' => 'success',
             'model' => 'toast',
             'title' => 'Page Added',
-        ]
+        ],
+        'default-error' => [
+            'message' => 'An error has occurred. Please try again.',
+            'type' => 'error',
+            'model' => 'toast',
+            'title' => 'Unknown Error',
+        ],
     ],
 
 ];
