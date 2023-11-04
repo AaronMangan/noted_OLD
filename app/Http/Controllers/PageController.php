@@ -31,13 +31,14 @@ class PageController extends Controller
     public function store(CreateNewPageRequest $request)
     {
         //
-        $data = $request->safe()->only(['title', 'content']);
-        $data['user_id'] = $request->user()->id;
-        $data['content'] = $data['content'];
+        // $data = $request->safe()->only(['title', 'content']);
+        // $data['user_id'] = $request->user()->id;
+        // $data['content'] = $data['content'];
 
-        $saved = Page::create($data);
+        // $saved = Page::create($data);
 
-        $request->session()->flash('status', ($saved) ? 'success' : 'fail');
+        // notify()->success('Laravel Notify is awesome!');
+        notify()->preset('page-added');
         return redirect('dashboard');
     }
 
