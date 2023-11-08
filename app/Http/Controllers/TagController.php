@@ -70,5 +70,9 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         //
+        if($tag->delete()) {
+            notify()->success('Tag deleted successfully', 'Success');
+        }
+        return redirect()->route('profile.edit');
     }
 }

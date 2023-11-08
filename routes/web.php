@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('pages', PageController::class)->only(['index', 'create', 'show',  'edit', 'store', 'update', 'delete']);
-    Route::resource('tags', TagController::class)->only('index', 'store');
+    Route::resource('tags', TagController::class)->only('index', 'store', 'destroy');
 });
 
 require __DIR__ . '/auth.php';

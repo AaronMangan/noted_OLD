@@ -6,7 +6,6 @@
     </x-slot>
 
     <div class="py-12">
-
         <!-- App Settings -->
         <div class="mx-auto mb-6 space-y-6 max-w-7xl sm:px-6 lg:px-8">
             <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
