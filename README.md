@@ -27,4 +27,5 @@ Contributions are always welcome! If you want to fork it, go right ahead.
 Noted was made with love for my brother, Allan - Who loves all things coffee and needed a way to keep track of the different settings used by his coffee machine to make the PERFECT brew!
 
 <small>© Aaron Mangan 2023</small>
+
 <small>Please let me know if you find any bugs or have any feature requests, or you just have questions!</small>

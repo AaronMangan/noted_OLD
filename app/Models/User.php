@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\models\Page;
+use App\Models\Page;
 
 class User extends Authenticatable
 {
@@ -49,5 +49,10 @@ class User extends Authenticatable
     public function pages()
     {
         return $this->hasMany(Page::class);
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
     }
 }

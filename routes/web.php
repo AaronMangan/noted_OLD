@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('pages', App\Http\Controllers\PageController::class)->only(['index', 'create', 'show',  'edit', 'store', 'update', 'delete']);
+    Route::resource('pages', PageController::class)->only(['index', 'create', 'show',  'edit', 'store', 'update', 'delete']);
+    Route::resource('tags', TagController::class)->only('index', 'store');
 });
 
 require __DIR__ . '/auth.php';

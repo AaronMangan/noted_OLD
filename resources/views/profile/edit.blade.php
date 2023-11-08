@@ -10,8 +10,8 @@
         <!-- App Settings -->
         <div class="mx-auto mb-6 space-y-6 max-w-7xl sm:px-6 lg:px-8">
             <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.manage-tags')
+                <div class="max-w-full">
+                    @include('profile.partials.manage-tags', $tags)
                 </div>
             </div>
         </div>

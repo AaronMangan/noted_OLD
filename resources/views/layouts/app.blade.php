@@ -25,5 +25,6 @@
                 {{ $slot }}
             </main>
         </div>
+        <x-notify::notify />
     </body>
 </html>

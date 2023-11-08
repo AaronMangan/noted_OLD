@@ -14,7 +14,7 @@
                             {{ $page->title }}
                         </div>
                         <div class="float-right p-2 align-middle d-flex col">
-                            <x-primary-button onclick="window.location='{{ URL::route('pages.show', $page->id); }}'" class="flex float-right mt-2">Save</x-primary-button>
+                            <x-primary-button onclick="window.location='{{ URL::route('pages.show', $page->id); }}'" class="flex float-right mt-3 align-baseline">View</x-primary-button>
                         </div>
                     </div>
                 @endforeach

@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateNewTagRequest;
 
 class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        return $request->user()->tags()->paginate($request->per_page ?? 20);
     }
 
     /**
@@ -26,9 +28,16 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateNewTagRequest $request)
     {
         //
+        $filtered = $request->safe()->only(['name', 'description']);
+        $filtered['user_id'] = $request->user()->id;
+        $tag = Tag::create($filtered);
+        if(isset($tag->id)) {
+            notify()->success('Tag created successfully', 'Success');
+        }
+        return redirect()->route('profile.edit');
     }
 
     /**
