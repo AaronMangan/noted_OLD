@@ -7,17 +7,22 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            @include('components.search')
             <div class="m-3 overflow-hidden bg-white dark:bg-gray-800 sm:rounded-lg">
-                @foreach($pages as $page)
-                    <div class="mt-2 mb-2 border-2 border-gray-100 rounded shadow-sm columns-2 d-inline">
-                        <div class="w-full p-6 text-gray-800 col dark:text-gray-100">
-                            {{ $page->title }}
+                @if(count($pages) > 0)
+                    @foreach($pages as $page)
+                        <div class="mt-2 mb-2 border-2 border-gray-100 rounded shadow-sm columns-2 d-inline">
+                            <div class="w-full p-6 text-gray-800 col dark:text-gray-100">
+                                {{ $page->title }}
+                            </div>
+                            <div class="float-right p-2 align-middle d-flex col">
+                                <x-primary-button onclick="window.location='{{ URL::route('pages.show', $page->id); }}'" class="flex float-right mt-3 align-baseline">View</x-primary-button>
+                            </div>
                         </div>
-                        <div class="float-right p-2 align-middle d-flex col">
-                            <x-primary-button onclick="window.location='{{ URL::route('pages.show', $page->id); }}'" class="flex float-right mt-3 align-baseline">View</x-primary-button>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <p class="m-4 text-xl text-center text-gray-500">No Results</p>
+                @endif
             </div>
         </div>
     </div>

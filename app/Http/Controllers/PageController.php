@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateNewPageRequest;
+use App\Http\Requests\DashboardRequest;
 
 class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(DashboardRequest $request)
     {
-        //
+        // Check for a search option.
+        $search = $request->safe()->only('search')['search'] ?? '';
+        return view('dashboard', ['pages' => \Auth::user()->pages()->where(function ($query) use ($search) {
+            return $query->where('title', 'like', "%{$search}%")
+                ->orWhere("content", "like", "%{$search}%");
+        })->get(),
+        'search' => $search]);
     }
 
     /**
