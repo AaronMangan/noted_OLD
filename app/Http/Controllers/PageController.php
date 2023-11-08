@@ -29,7 +29,8 @@ class PageController extends Controller
     public function create()
     {
         //
-        return view('create');
+        $tags = \Auth::user()->tags()->orderBy('name', 'asc')->get();
+        return view('create', compact('tags'));
     }
 
     /**
