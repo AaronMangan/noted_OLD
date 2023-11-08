@@ -39,7 +39,7 @@ class PageController extends Controller
     public function store(CreateNewPageRequest $request)
     {
         // Get user data.
-        $data = $request->safe()->only(['title', 'content']);
+        $data = $request->safe()->only(['title', 'content', 'tags']);
         $data['user_id'] = $request->user()->id;
         $data['content'] = $data['content'];
 

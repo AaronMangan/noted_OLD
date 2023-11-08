@@ -18,8 +18,8 @@
                         </div>
                         <div class="items-center d-flex">
                             <div class="w-full">
-                                <x-input-label for="title" class="my-4 text-lg font-black" :value="__('Contents')" />
-                                <x-select :options="$tags"></x-select>
+                                <x-input-label for="tags" class="my-4 text-lg font-black" :value="__('Tags')" />
+                                <x-select name="tags[]" id="tags" :options="$tags"></x-select>
                             </div>
                         </div>
                         <input type="hidden" name="content" id="content">
