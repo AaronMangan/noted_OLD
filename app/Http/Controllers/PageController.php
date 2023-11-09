@@ -86,5 +86,11 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         //
+        if($page->delete()) {
+            notify()->success('Page deleted successfully', 'Success');
+        } else {
+            notify()->preset('default-error');
+        }
+        return redirect('dashboard');
     }
 }

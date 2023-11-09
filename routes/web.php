@@ -32,7 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('pages', PageController::class)->only(['index', 'create', 'show',  'edit', 'store', 'update', 'delete']);
+    Route::resource('pages', PageController::class)->only(['index', 'create', 'show',  'edit', 'store', 'update', 'destroy']);
     Route::resource('tags', TagController::class)->only('index', 'store', 'destroy');
 });
 
