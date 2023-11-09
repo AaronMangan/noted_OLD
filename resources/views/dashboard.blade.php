@@ -11,10 +11,10 @@
             <div class="m-3 bg-white dark:bg-gray-800 sm:rounded-lg">
                 @if(count($pages) > 0)
                     @foreach($pages as $page)
-                    <div class="flex justify-between w-full align-baseline border border-gray-100 rounded-md shadow-sm">
+                    <div class="flex justify-between w-full mt-3 align-baseline border border-gray-100 rounded-md shadow-sm">
                         <div class="flex w-full px-4 py-2 m-2 text-left text-gray-800">
-                            <div class="w-full mt-1 text-gray-700 align-middle col dark:text-gray-100">
-                                <div class="font-semibold">{{ $page->title }}</div>
+                            <div class="w-full mt-1 text-gray-700 align-middle col text-clip dark:text-gray-100">
+                                <div class="font-semibold"><span class="text-clip">{{ $page->title }}</span></div>
                             </div>
                         </div>
                         <div class="flex self-end justify-end float-right px-4 py-2 m-2 text-gray-800">

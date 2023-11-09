@@ -1,4 +1,4 @@
-<div class="w-full pr-4 m-3">
+<div class="mx-auto mr-4 max-w-7xl sm:px-6 lg:px-8">
     <form method="get" action="{{ route('dashboard') }}">
     @csrf
     <div class="flex columns-2">
