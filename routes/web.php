@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('pages', PageController::class)->only(['index', 'create', 'show',  'edit', 'store', 'update', 'destroy']);
     Route::resource('templates', TemplateController::class)->only(['index', 'create', 'show', 'edit', 'store', 'update', 'destroy']);
+
+    Route::post('/pages/{page}/share', [PageController::class, 'share'])->name('pages.share');
 });
 
 require __DIR__ . '/auth.php';

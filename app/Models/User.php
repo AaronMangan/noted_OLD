@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Template::class);
     }
+
+    public function shared()
+    {
+        return \App\Models\Page::whereJsonContains('shared_with_users', $this->id)->get();
+    }
 }

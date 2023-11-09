@@ -6,6 +6,8 @@ use App\Models\Page;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateNewPageRequest;
 use App\Http\Requests\DashboardRequest;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
 
 class PageController extends Controller
 {
@@ -16,11 +18,16 @@ class PageController extends Controller
     {
         // Check for a search option.
         $search = $request->safe()->only('search')['search'] ?? '';
-        return view('dashboard', ['pages' => \Auth::user()->pages()->where(function ($query) use ($search) {
-            return $query->where('title', 'like', "%{$search}%")
-                ->orWhere("content", "like", "%{$search}%");
-        })->get(),
-        'search' => $search]);
+        return view(
+            'dashboard',
+            ['pages' => \Auth::user()->pages()->where(function ($query) use ($search) {
+                return $query->where('title', 'like', "%{$search}%")
+                    ->orWhere("content", "like", "%{$search}%");
+            })->get(),
+            'search' => $search,
+            'shared' => \Auth::user()->shared(),
+        ]
+        );
     }
 
     /**
@@ -45,6 +52,7 @@ class PageController extends Controller
         $data = $request->safe()->only(['title', 'content', 'tags']);
         $data['user_id'] = $request->user()->id;
         $data['content'] = $data['content'];
+        $data['shared_with_users'] = [];
 
         // Create page.
         $saved = Page::create($data);
@@ -61,18 +69,26 @@ class PageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Page $page)
+    public function show(Request $request, Page $page)
     {
         //
+        if(!Gate::allows('view-page', $page, $request->user())) {
+            notify()->warning('You do not have permission to access this page', 'Warning');
+            return redirect()->route('dashboard');
+        }
         return view('view', compact('page'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Page $page)
+    public function edit(Request $request, Page $page)
     {
-        //
+        // Can the user edit that page?
+        if(!Gate::allows('manage-page', $page, $request->user())) {
+            notify()->warning('You do not have permission to edit this page', 'Warning');
+            return redirect()->route('dashboard');
+        }
         return view('edit', compact('page'));
     }
 
@@ -95,7 +111,7 @@ class PageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Page $page)
+    public function destroy(Request $request, Page $page)
     {
         //
         if($page->delete()) {
@@ -104,5 +120,29 @@ class PageController extends Controller
             notify()->preset('default-error');
         }
         return redirect('dashboard');
+    }
+
+    /**
+     * Share the page, if you have the right to do so.
+     *
+     * @param Request $request
+     * @param Page $page
+     * @return void
+     */
+    public function share(Request $request, Page $page)
+    {
+        if(!Gate::allows('manage-page', $page, $request->user())) {
+            notify()->warning('You do not have permission to share this page', 'Warning');
+        }
+
+        $user = User::where('email', $request->email)->first();
+        if(!isset($user->id) || $page->user->id == $user->id) {
+            notify()->error('User was not found to share with, or trying to share with page owner.', 'Error');
+            return redirect()->route('dashboard');
+        } elseif($page->share($user->id)) {
+            notify()->success("Page was shared with {$request->email}", 'Success');
+        }
+
+        return redirect()->route('dashboard');
     }
 }
