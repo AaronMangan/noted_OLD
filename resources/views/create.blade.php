@@ -16,13 +16,7 @@
                                 <div id="editor" class="w-full mt-1 border-gray-300 rounded-md shadow-sm row"><div>
                             </div>
                         </div>
-                        <div class="items-center d-flex">
-                            <div class="w-full">
-                                <x-input-label for="tags" class="my-4 text-lg font-black" :value="__('Tags')" />
-                                <x-select name="tags[]" id="tags" :options="$tags"></x-select>
-                            </div>
-                        </div>
-                        <input type="hidden" name="content" id="content">
+                        <input type="hidden" value="{{$from['template'] ?? ''}}" name="content" id="content">
                         <div class="flex float-right gap-4">
                             <x-primary-button class="flex float-right mt-2">Save</x-primary-button>
                         </div>

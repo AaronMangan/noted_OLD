@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateNewTemplateRequest;
+use App\Http\Requests\EditTemplateRequest;
 use App\Models\Template;
 use Illuminate\Http\Request;
 
@@ -26,9 +28,19 @@ class TemplateController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateNewTemplateRequest $request)
     {
         //
+        $data = $request->safe()->only(['name', 'template']);
+        $data['user_id'] = $request->user()->id;
+        $template = Template::create($data);
+        if(isset($template->id)) {
+            notify()->success('Template created successfully!', 'Success');
+        } else {
+            notify()->preset('default-error');
+        }
+
+        return redirect()->route('profile.edit');
     }
 
     /**
@@ -50,9 +62,16 @@ class TemplateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Template $template)
+    public function update(EditTemplateRequest $request, Template $template)
     {
-        //
+        // Update the template and redirect bask to settings.
+        $done = $template->update($request->safe()->only(['name', 'template']));
+        if($done) {
+            notify()->success('Template updated successfully!', 'Success');
+        } else {
+            notify()->preset('default-error');
+        }
+        return redirect()->route('profile.edit');
     }
 
     /**
@@ -61,5 +80,12 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         //
+        if($template->delete()) {
+            notify()->success("Template deleted successfully", "Success");
+        } else {
+            notify()->error("An error occurred", "Error");
+        }
+
+        redirect()->route('profile.edit');
     }
 }

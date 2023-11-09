@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TagController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -33,7 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('pages', PageController::class)->only(['index', 'create', 'show',  'edit', 'store', 'update', 'destroy']);
-    Route::resource('tags', TagController::class)->only('index', 'store', 'destroy');
+    Route::resource('templates', TemplateController::class)->only(['index', 'create', 'show', 'edit', 'store', 'update', 'destroy']);
 });
 
 require __DIR__ . '/auth.php';

@@ -6,11 +6,11 @@
     </x-slot>
 
     <div class="py-12">
-        <!-- App Settings -->
+        <!-- Templates -->
         <div class="mx-auto mb-6 space-y-6 max-w-7xl sm:px-6 lg:px-8">
             <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
                 <div class="max-w-full">
-                    @include('profile.partials.manage-tags', $tags)
+                    @include('profile.partials.manage-templates', $templates)
                 </div>
             </div>
         </div>

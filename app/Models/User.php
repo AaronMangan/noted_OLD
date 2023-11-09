@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Page;
+use App\Models\Template;
 
 class User extends Authenticatable
 {
@@ -51,8 +52,8 @@ class User extends Authenticatable
         return $this->hasMany(Page::class);
     }
 
-    public function tags()
+    public function templates()
     {
-        return $this->hasMany(Tag::class);
+        return $this->hasMany(Template::class);
     }
 }

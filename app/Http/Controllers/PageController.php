@@ -26,11 +26,14 @@ class PageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        // If the user wants to create a new page from the template.
+        $from = $request->has('template_id') ? $request->user()->templates()->find($request->template_id) : null;
+
         //
-        $tags = \Auth::user()->tags()->orderBy('name', 'asc')->get();
-        return view('create', compact('tags'));
+        $templates = \Auth::user()->templates()->orderBy('name', 'asc')->get() ?? [];
+        return view('create', compact('templates', 'from'));
     }
 
     /**

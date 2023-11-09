@@ -13,20 +13,22 @@ class InitialDatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create the initial page.
-        \App\Models\Page::create([
-            "title" => "Using Markdown",
-            "body" => $this->entryText(),
-        ]);
+        // \App\Models\Page::create([
+        //     "title" => "Using Markdown",
+        //     "content" => "{$this->entryText()}",
+        //     "user_id" => 1,
+        // ]);
 
-        // Create some tags
-        foreach ($this->tags() as $tag) {
-            \App\Models\Tag::create($tag);
-        }
+        \App\Models\Template::create([
+            'name' => 'Simple',
+            'template' => "# Heading",
+            'user_id' => 1,
+        ]);
     }
 
     private function entryText(): string
     {
-        return "
+        return '
         # **Using Markdown**
 
         This guide will help you writing markdown, which is a simple way to write plain text that can be converted to HTML.
@@ -102,18 +104,6 @@ class InitialDatabaseSeeder extends Seeder
 
         **Mail Link**
         [Email](mailto:email@anemailaddress.com)
-        ";
-    }
-
-    private function tags(): array
-    {
-        return [
-            [
-                'name' => 'Markdown',
-                'description' => 'Pages related to using markdown',
-                'user_id' => 1,
-                'search' => false,
-            ]
-        ];
+        ';
     }
 }

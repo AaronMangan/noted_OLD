@@ -18,7 +18,7 @@ class ProfileController extends Controller
     {
         return view('profile.edit', [
             'user' => $request->user(),
-            'tags' => $request->user()->tags()->get(['id', 'name', 'description'])->toArray(),
+            'templates' => $request->user()->templates()->get(['id', 'name', 'template'])->toArray(),
         ]);
     }
 
