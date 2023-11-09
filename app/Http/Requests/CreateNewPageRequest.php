@@ -28,9 +28,6 @@ class CreateNewPageRequest extends FormRequest
             'content' => [
                 'string', 'required'
             ],
-            'tags' => [
-                'array', 'nullable'
-            ],
         ];
     }
 }

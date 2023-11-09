@@ -14,13 +14,23 @@ const editor = new Editor({
   height: '50pc',
   initialEditType: 'markdown',
   placeholder: 'Enter your notes...',
-  initialValue: document.querySelector('#content').value || '',
+  initialValue: '',
 });
 
 let hasEditor = document.body.contains(document.querySelector('#new_page_form'));
 if(hasEditor) {
     // This is used to inject the markdown contents into the form on the create page
     document.querySelector('#new_page_form').addEventListener('submit', e => {
+        e.preventDefault();
+        document.querySelector('#content').value = editor.getMarkdown() || '';
+        e.target.submit();
+    });
+}
+
+let hasUpdateEditor = document.body.contains(document.querySelector('#edit_page_form'));
+if(hasUpdateEditor) {
+    // This is used to inject the markdown contents into the form on the create page
+    document.querySelector('#edit_page_form').addEventListener('submit', e => {
         e.preventDefault();
         document.querySelector('#content').value = editor.getMarkdown() || '';
         e.target.submit();
@@ -48,5 +58,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         document.querySelector('#editor').value = document.querySelector('#content').value || '';
         editor.setMarkdown(document.querySelector('#content').value || '');
     }
-    console.log(document.querySelector('#content').value);
 });
+
+function clicked() {
+    alert('you clicked:');
+}

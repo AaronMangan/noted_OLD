@@ -42,19 +42,15 @@
                                         </x-slot>
 
                                         <x-slot name="content">
-                                            <x-dropdown-link x-on:click.prevent="$dispatch('open-modal', 'edit-template')">
-                                                {{ __('Edit') }}
-                                            </x-dropdown-link>
                                             <x-dropdown-link :href="route('pages.create', ['template_id' => $template['id']])">
                                                 {{ __('Page From') }}
                                             </x-dropdown-link>
                                             <hr/>
-                                            <form method="post" action="{{ route('pages.destroy', $template['id']) }}">
+                                            <form method="post" action="{{ route('templates.destroy', $template['id']) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <x-dropdown-link
-                                                    onclick="event.preventDefault();
-                                                    this.closest('form').submit();"
+                                                    onclick="this.closest('form').submit();"
                                                 >{{ __('Delete') }}</x-dropdown-link>
                                             </form>
                                         </x-slot>
@@ -67,34 +63,6 @@
             </table>
         </div>
     </div>
-
-    <!-- Edit Template modal -->
-    <x-modal name="edit-template" id="edit-template" :show="$errors->editTemplate->isNotEmpty()" focusable>
-        <div class="p-3">
-            <form method="post" action="{{ route('templates.update', $template['id']) }}" id="edit-template-form" class="space-y-1">
-                @csrf
-                @method('patch')
-                <!-- Name -->
-                <div>
-                    <x-input-label for="name" class="mb-2 text-lg font-black" :value="__('Name')" />
-                    <x-text-input id="name" name="name" type="text" class="block w-full mt-1 text-lg" :value="$template['name'] ?? ''" required autofocus/>
-                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
-                </div>
-
-                <!-- Template -->
-                <div class="items-center d-flex">
-                    <div class="w-full">
-                        <x-input-label for="title" class="my-4 text-lg font-black" :value="__('Contents')" />
-                        <div id="editor" class="w-full mt-1 border-gray-300 rounded-md shadow-sm row"><div>
-                    </div>
-                </div>
-                <input type="hidden" name="template" id="content" value="{{$template['template'] ?? ''}}">
-                <div class="flex float-right gap-4 mb-2">
-                    <x-primary-button type="submit" class="flex float-right mt-2">Save</x-primary-button>
-                </div>
-            </form>
-        </div>
-    </x-modal>
 
     <!-- Create New Template. -->
     <x-modal name="create-new-template" id="create-new-template" :show="$errors->userDeletion->isNotEmpty()" focusable>

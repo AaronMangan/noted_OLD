@@ -73,14 +73,23 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         //
+        return view('edit', compact('page'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Page $page)
+    public function update(CreateNewPageRequest $request, Page $page)
     {
         //
+        $data = $request->only(['title', 'content']);
+
+        if($page->update($data)) {
+            notify()->success('Page updated successfully', 'Success');
+        } else {
+            notify()->preset('default-error');
+        }
+        return redirect()->route('dashboard');
     }
 
     /**

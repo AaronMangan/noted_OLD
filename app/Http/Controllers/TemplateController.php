@@ -86,6 +86,6 @@ class TemplateController extends Controller
             notify()->error("An error occurred", "Error");
         }
 
-        redirect()->route('profile.edit');
+        return redirect()->route('profile.edit');
     }
 }
