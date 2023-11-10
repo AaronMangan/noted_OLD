@@ -14,7 +14,9 @@
                         <div class="flex justify-between w-full mt-3 align-baseline border border-gray-100 rounded-md shadow-sm">
                             <div class="flex w-full px-4 py-2 m-2 text-left text-gray-800">
                                 <div class="w-full mt-1 text-gray-700 align-middle col text-clip dark:text-gray-100">
-                                    <div class="font-semibold"><span class="text-clip" onclick='window.location="{{route('pages.show', $page->id)}}"'>{{ $page->title }}</span></div>
+                                    <div class="font-semibold">
+                                        <span class="text-clip" onclick='window.location="{{route('pages.show', $page->id)}}"'>{{ $page->title }}</span><span class="text-lg text-red-500">{{ $page->private ? "*" : "" }}</span>
+                                    </div>
                                 </div>
                                 <div class="w-full mt-2 text-xs text-center text-gray-400 flex-inline">{{$page->user->name}}</div>
                             </div>
