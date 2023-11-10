@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PageSettingsController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -35,7 +36,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('pages', PageController::class)->only(['index', 'create', 'show',  'edit', 'store', 'update', 'destroy']);
     Route::resource('templates', TemplateController::class)->only(['index', 'create', 'show', 'edit', 'store', 'update', 'destroy']);
 
+    // Share a page.
     Route::post('/pages/{page}/share', [PageController::class, 'share'])->name('pages.share');
+
+    // Page Settings.
+    Route::resource('/pages/{page}/settings', PageSettingsController::class)->only(['create', 'store'])->name('page-settings.create', 'page-settings.store');
 });
 
 require __DIR__ . '/auth.php';

@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         // Check a user may edit a page. Only users that own the page may edit it.
         Gate::define('manage-page', function (User $user, Page $page) {
-            return ($user->id === $page->user_id);
+            return ((int) $user->id == (int) $page->user_id) ? true : false;
         });
 
         // Check a user may view a page
