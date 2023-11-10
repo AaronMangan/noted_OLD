@@ -7,13 +7,13 @@
 
     <div class="py-12">
         <!-- Page Settings -->
-        <div class="mx-auto mb-6 space-y-6 max-w-7xl sm:px-6 lg:px-8">
-            <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
+        <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+            <div class="bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
                 <form method="post" action="{{ route('settings.store', $page->id) }}" id="page-settings-form" class="space-y-0">
                     @csrf
                     <div class="h-full">
-                        <div class="m-1">
-                            <x-text-input id="private" name="private" type="checkbox" class="inline-block text-lg" :value="old('private')" />
+                        <div class="m-0">
+                            <x-text-input :checked="$page->private" id="private" name="private" type="checkbox" class="inline-block text-lg" :value="old('private')" />
                             <x-input-label for="private" class="inline-block pt-2 mb-2 ml-3 font-bold justify-baseline" :value="__('Private')" />
                             <x-input-label for="private" class="inline-block pt-2 mb-2 ml-3 text-xs text-gray-200 text-md justify-baseline" :value="__('Private pages cannot be shared. If the page is already shared, those users will not be able to view the page until it is not marked as private')" />
                             <x-input-error class="mt-2" :messages="$errors->get('private')" />
