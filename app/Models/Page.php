@@ -9,10 +9,11 @@ class Page extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content', 'user_id', 'shared_with_users'];
+    protected $fillable = ['title', 'content', 'user_id', 'private', 'shared_with_users'];
 
     protected $casts = [
         'shared_with_users' => 'array',
+        'private' => 'bool',
     ];
 
     public function user()

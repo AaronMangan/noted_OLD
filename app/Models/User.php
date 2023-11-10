@@ -59,6 +59,6 @@ class User extends Authenticatable
 
     public function shared()
     {
-        return \App\Models\Page::whereJsonContains('shared_with_users', $this->id)->get();
+        return \App\Models\Page::whereJsonContains('shared_with_users', $this->id)->where('private', false)->get();
     }
 }

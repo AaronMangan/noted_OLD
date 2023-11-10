@@ -36,11 +36,11 @@ class PageSettingsController extends Controller
     public function store(UpdateSettingsRequest $request, Page $page)
     {
         $valid = $request->validated();
-        $valid['private'] = (isset($valid['private']) && $valid['private'] == 'on') ? true : false;
+        $valid['private'] = (isset($valid['private']) && $valid['private'] == 'on') ? 1 : 0;
+
         if($page->update($valid)) {
             notify()->success('Settings saved successfully', 'Success');
         }
-
         return redirect()->route('settings.create', $page->id);
     }
 
