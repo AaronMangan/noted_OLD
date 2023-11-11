@@ -25,6 +25,7 @@ class UpdateSettingsRequest extends FormRequest
     {
         return [
             'private' => ['in:on,off', 'nullable'],
+            'shared_with_users' => ['string', 'max:1000', 'nullable'],
         ];
     }
 }

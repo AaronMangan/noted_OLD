@@ -6,6 +6,9 @@ use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UpdateSettingsRequest;
+use App\Services\SettingsService;
+use Illuminate\Support\Str;
+use App\Models\User;
 
 class PageSettingsController extends Controller
 {
@@ -24,6 +27,7 @@ class PageSettingsController extends Controller
     {
         //
         if(Gate::allows('manage-page', $page, \Auth::user())) {
+            $page->shared_with_users = implode('; ', User::whereIn('id', $page->shared_with_users)->pluck('email')->toArray());
             return view('page-settings', compact('page'));
         }
         notify()->warning('You do not have permissions', 'Not Allowed');
@@ -35,10 +39,18 @@ class PageSettingsController extends Controller
      */
     public function store(UpdateSettingsRequest $request, Page $page)
     {
-        $valid = $request->validated();
-        $valid['private'] = (isset($valid['private']) && $valid['private'] == 'on') ? 1 : 0;
+        // Get User Input.
+        $settings = $request->validated();
+        $settings['private'] = (isset($settings['private']) && $settings['private'] == 'on') ? 1 : 0;
+        $settings['shared_with_users'] = Str::of($settings['shared_with_users'])->remove(' ')->trim()->explode(';');
 
-        if($page->update($valid)) {
+        // Instantiate a new Settings Service & Update.
+        $settingsService = new SettingsService($page);
+        $updated = $settingsService->setSharedWithUsers($settings['shared_with_users']->toArray() ?? [])
+            ->setPrivate($settings['private'])
+            ->update();
+
+        if($updated) {
             notify()->success('Settings saved successfully', 'Success');
         }
         return redirect()->route('settings.create', $page->id);
