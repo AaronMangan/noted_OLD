@@ -8,6 +8,11 @@
     <div class="py-12">
         <!-- Page Settings -->
         <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+            <div class="flex inline-flex items-center justify-center w-full">
+                <a class="mr-2 text-xs text-gray-400 cursor-pointer" onclick='window.location="{{route('pages.show', $page->id)}}"'>Back</a>
+                <span class="text-xs text-gray-300">|</span>
+                <a class="ml-2 text-xs text-gray-400 cursor-pointer" onclick='window.location="{{route('dashboard')}}"'>Dashboard</a>
+            </div>
             <div class="bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
                 <form method="post" action="{{ route('settings.store', $page->id) }}" id="page-settings-form" class="space-y-0">
                     @csrf
