@@ -35,9 +35,11 @@
 
                                     <x-slot name="content">
                                         <x-dropdown-link :href="route('pages.show', $page->id)">
+                                            <i class="fa-solid fa-eye"></i>
                                             {{ __('View') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('pages.edit', $page->id)">
+                                            <i class="fa-solid fa-pen-to-square"></i>
                                             {{ __('Edit') }}
                                         </x-dropdown-link>
                                         <hr/>
@@ -47,10 +49,15 @@
                                             <x-dropdown-link
                                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();"
-                                            >{{ __('Delete') }}</x-dropdown-link>
+                                            >
+                                            <i class="fa-solid fa-trash"></i>
+                                            {{ __('Delete') }}</x-dropdown-link>
                                         </form>
                                         <hr/>
-                                        <x-dropdown-link x-data="" data-id="{{$page->id}}" x-on:click.prevent="$dispatch('open-modal', 'share-this-page-{{$page->id}}')">Share</x-dropdown-link>
+                                        <x-dropdown-link x-data="" data-id="{{$page->id}}" x-on:click.prevent="$dispatch('open-modal', 'share-this-page-{{$page->id}}')">
+                                            <i class="fa-solid fa-share"></i>
+                                            Share
+                                        </x-dropdown-link>
                                     </x-slot>
                                 </x-dropdown>
                             </div>

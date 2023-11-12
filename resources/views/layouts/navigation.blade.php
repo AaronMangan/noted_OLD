@@ -35,10 +35,12 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('pages.create')">
+                            <i class="fa-regular fa-square-plus"></i>
                             {{ __('Create') }}
                         </x-dropdown-link>
                         <hr/>
                         <x-dropdown-link :href="route('profile.edit')">
+                            <i class="fa-solid fa-sliders"></i>
                             {{ __('Settings') }}
                         </x-dropdown-link>
 
@@ -49,6 +51,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
+                                <i class="fa-solid fa-right-from-bracket"></i>
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
