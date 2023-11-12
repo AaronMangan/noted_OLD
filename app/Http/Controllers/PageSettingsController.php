@@ -27,7 +27,7 @@ class PageSettingsController extends Controller
     {
         //
         if(Gate::allows('manage-page', $page, \Auth::user())) {
-            $page->shared_with_users = implode('; ', User::whereIn('id', $page->shared_with_users)->pluck('email')->toArray());
+            $page->shared_with_users = implode('; ', User::whereIn('id', $page->shared_with_users ?? [])->pluck('email')->toArray() ?? []);
             return view('page-settings', compact('page'));
         }
         notify()->warning('You do not have permissions', 'Not Allowed');

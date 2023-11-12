@@ -97,14 +97,17 @@ class PageController extends Controller
      */
     public function update(CreateNewPageRequest $request, Page $page)
     {
-        //
-        $data = $request->only(['title', 'content']);
+        if(Gate::allows('manage-page', $page, $request->user())) {
+            $data = $request->only(['title', 'content']);
 
-        if($page->update($data)) {
-            notify()->success('Page updated successfully', 'Success');
-        } else {
-            notify()->preset('default-error');
+            if($page->update($data)) {
+                notify()->success('Page updated successfully', 'Success');
+            } else {
+                notify()->preset('default-error');
+            }
         }
+
+        //
         return redirect()->route('dashboard');
     }
 
