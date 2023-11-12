@@ -30,7 +30,10 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check a user may view a page
         Gate::define('view-page', function (User $user, Page $page) {
-            return ($user->id === $page->user_id || (isset($page->shared_with_users) && in_array($user->id, $page->shared_with_users ?? [])));
+            return (
+                $user->id === $page->user_id ||
+                (!$page->private && isset($page->shared_with_users) && in_array($user->id, $page->shared_with_users ?? []))
+            );
         });
     }
 }

@@ -5,7 +5,9 @@
             <div class="flex inline-flex items-center justify-center w-full">
                 <a class="mr-2 text-xs text-gray-400 cursor-pointer" onclick='window.location="{{route('dashboard')}}"'>Back</a>
                 <span class="text-xs text-gray-300">|</span>
-                <a class="ml-2 text-xs text-gray-400 cursor-pointer" onclick='window.location="{{route('settings.create', $page->id)}}"'>Settings</a>
+                <a class="ml-2 mr-2 text-xs text-gray-400 cursor-pointer" onclick='window.location="{{route('settings.create', $page->id)}}"'>Settings</a>
+                <span class="text-xs text-gray-300">|</span>
+                <a class="ml-2 text-xs text-gray-400 cursor-pointer" onclick='window.location="{{route('pages.edit', $page->id)}}"'>Edit</a>
             </div>
             <div class="py-4 overflow-hidden bg-white dark:bg-gray-800">
                 {!! \Illuminate\Support\Str::markdown($page->content) !!}

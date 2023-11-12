@@ -31,7 +31,7 @@
                         <div class="mt-2 mb-2">
                             <x-input-label for="shared_with_users" class="inline-block pt-2 mb-2 font-bold justify-baseline" :value="__('Share')" />
                             <x-text-input id="shared_with_users" name="shared_with_users" type="text" class="inline-block w-full text-sm" value="{{$page['shared_with_users']}}" /><br/>
-                            <x-input-label for="private" class="inline-block pt-2 mt-1 mb-2 text-xs text-gray-200 text-md justify-baseline" :value="__('Add emails, separated by a colon to share this page')" />
+                            <x-input-label for="private" placeholder="hello@example.com; greetings@domain.com" class="inline-block pt-2 mt-1 mb-2 text-xs text-gray-200 text-md justify-baseline" :value="__('Add emails, separated by a semicolon to share this page')" />
                             <x-input-error class="mt-2" :messages="$errors->get('private')" />
                         </div>
                     </div>
