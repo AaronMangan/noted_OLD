@@ -19,7 +19,8 @@
                     <div class="h-full">
                         <div class="mb-2">
                             <x-text-input :checked="$page->private" id="private" name="private" type="checkbox" class="inline-block text-lg" :value="old('private')" />
-                            <x-input-label for="private" class="inline-block pt-2 mb-2 ml-3 font-bold justify-baseline" :value="__('Private')" /><br/>
+                            <x-input-label for="private" class="inline-block pt-2 mb-2 ml-3 font-bold justify-baseline" :value="__('Private')" />
+                            <br/>
                             <x-input-label for="private" class="inline-block pt-2 mb-2 text-xs text-gray-200 text-md justify-baseline" :value="__('Private pages cannot be shared. If the page is already shared, those users will not be able to view the page until it is not marked as private')" />
                             <x-input-error class="mt-2" :messages="$errors->get('private')" />
                         </div>
