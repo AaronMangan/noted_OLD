@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateSettingsRequest;
 use App\Services\SettingsService;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Facades\URL;
 
 class PageSettingsController extends Controller
 {
@@ -28,7 +29,8 @@ class PageSettingsController extends Controller
         //
         if(Gate::allows('manage-page', $page, \Auth::user())) {
             $page->shared_with_users = implode('; ', User::whereIn('id', $page->shared_with_users ?? [])->pluck('email')->toArray() ?? []);
-            return view('page-settings', compact('page'));
+            $publicUrl = URL::signedRoute('page.public', ['page' => $page->id]);
+            return view('page-settings', compact('page', 'publicUrl'));
         }
         notify()->warning('You do not have permissions', 'Not Allowed');
         return redirect()->back();
