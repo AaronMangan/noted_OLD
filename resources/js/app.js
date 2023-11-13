@@ -1,4 +1,5 @@
 import './bootstrap';
+import './components/settings';
 
 import Alpine from 'alpinejs';
 
@@ -60,6 +61,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 });
 
-function clicked() {
-    alert('you clicked:');
-}
+document.querySelector('#share_form').addEventListener('show.bs.modal', e => {
+    // e.preventDefault();
+    // document.querySelector('#page').value = editor.getMarkdown() || '';
+    // e.target.submit();
+    alert('shown');
+});
