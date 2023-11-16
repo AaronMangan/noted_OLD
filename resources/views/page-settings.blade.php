@@ -13,6 +13,9 @@
                 <span class="text-xs text-gray-300">|</span>
                 <a class="ml-2 text-xs text-gray-400 cursor-pointer" onclick='window.location="{{route('dashboard')}}"'>Dashboard</a>
             </div>
+            <div id="private_message" class="mt-2 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
+                <p class="text-gray-500"><i class="mr-2 fa-solid fa-circle-info fa-xl" style="color: #8b8c8d;"></i><strong class="mr-2">Note:</strong>Pages marked as private will not be accessible by anyone but yourself, even if it has been shared with them.</p>
+            </div>
             <div class="bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
                 <form method="post" action="{{ route('settings.store', $page->id) }}" id="page-settings-form" class="space-y-0">
                     @csrf
@@ -34,6 +37,16 @@
                             <x-text-input id="shared_with_users" name="shared_with_users" type="text" class="inline-block w-full text-sm" value="{{$page['shared_with_users']}}" /><br/>
                             <x-input-label for="private" placeholder="hello@example.com; greetings@domain.com" class="inline-block pt-2 mt-1 mb-2 text-xs text-gray-200 text-md justify-baseline" :value="__('Add emails, separated by a semicolon to share this page')" />
                             <x-input-error class="mt-2" :messages="$errors->get('private')" />
+                        </div>
+                    </div>
+                    <hr class="pt-2 text-gray-300" />
+
+                    <!-- Public Access URL-->
+                    <div class="h-full">
+                        <div class="mt-2 mb-2">
+                            <x-input-label for="public_url" class="inline-block pt-2 mb-2 font-bold justify-baseline" :value="__('Public URL')" /><i id="btnClipboard" class="text-gray-400 fa fa-copy"></i><span class="inline-block ml-2 text-red-400 d-none"><small id="msgCopy">Copied to clipboard!</small></span>
+                            <x-text-input readonly id="public_url" name="public_url" onclick="copyToClipboard" type="text" class="inline-block w-full text-sm" value="{{$publicUrl}}" /><br/>
+                            <x-input-label for="public_url" placeholder="Opps, something went wrong, sorry!" class="inline-block pt-2 mt-1 mb-2 text-xs text-gray-200 text-md justify-baseline" :value="__('Anyone with this link can access the page.')" />
                         </div>
                     </div>
                 </form>
