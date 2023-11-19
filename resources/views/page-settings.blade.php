@@ -44,8 +44,8 @@
                     <!-- Public Access URL-->
                     <div class="h-full">
                         <div class="mt-2 mb-2">
-                            <x-input-label for="public_url" class="inline-block pt-2 mb-2 font-bold justify-baseline" :value="__('Public URL')" /><i id="btnClipboard" class="text-gray-400 fa fa-copy"></i><span class="inline-block ml-2 text-red-400 d-none"><small id="msgCopy">Copied to clipboard!</small></span>
-                            <x-text-input readonly id="public_url" name="public_url" onclick="copyToClipboard" type="text" class="inline-block w-full text-sm" value="{{$publicUrl}}" /><br/>
+                            <x-input-label for="public_url" class="inline-block pt-2 mb-2 font-bold justify-baseline" :value="__('Public URL')" /><i id="btnClipboard" onclick="this.copyToClipboard" class="text-gray-400 fa fa-copy"></i><span class="inline-block ml-2 text-red-400 d-none"><small id="msgCopy">Copied to clipboard!</small></span>
+                            <x-text-input readonly id="public_url" name="public_url" type="text" class="inline-block w-full text-sm" value="{{$publicUrl}}" /><br/>
                             <x-input-label for="public_url" placeholder="Opps, something went wrong, sorry!" class="inline-block pt-2 mt-1 mb-2 text-xs text-gray-200 text-md justify-baseline" :value="__('Anyone with this link can access the page.')" />
                         </div>
                     </div>
