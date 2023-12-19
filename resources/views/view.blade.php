@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="w-full mr-3 prose bg-white col-12 prose-slate max-w-none">
+    <div class="flex items-stretch justify-center w-full mr-3 prose bg-white col-12 prose-slate max-w-none">
         <div class="px-4 mx-auto ml-3 mr-3 bg-white max-w-7xl">
             <h1 class="pb-0 mt-[1em] bg-white mb-0 text-center">{{$page->title}}</h1>
             <div class="flex inline-flex items-center justify-center w-full">
