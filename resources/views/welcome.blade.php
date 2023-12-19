@@ -34,7 +34,7 @@
                 @endif
                 <div class="items-center justify-center h-screen mt-4">
                     <div class="content-center inline-block text-center">
-                        <span class="fa-solid fa-keyboard fa-2xl" style="color: #8b8c8d; font-size: 8em;"></span>
+                        <span class="fa-solid fa-keyboard md:fa-2xl" style="color: #8b8c8d; font-size: 8em;"></span>
                     </div>
                     <div class="mt-4">
                         <h1 class="text-center" style="color: #8b8c8d; font-size: 6em;">Noted</h1>
