@@ -17,8 +17,8 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center sm:items-center">
-            <div class="p-6 mx-auto max-w-7xl lg:p-8">
+        <div class="relative justify-center min-h-screen bg-gray-100 bg-center sm:flex sm:items-center">
+            <div class="p-6 pb-4 mx-auto mb-4 max-w-7xl lg:p-8 md:p-4 sm:p-2">
                 @if (Route::has('login'))
                     <div class="z-10 p-6 text-right sm:fixed sm:top-0 sm:right-0">
                         @auth
@@ -32,11 +32,11 @@
                         @endauth
                     </div>
                 @endif
-                <div class="">
+                <div class="items-center justify-center h-screen mt-4">
                     <div class="content-center inline-block text-center">
                         <span class="fa-solid fa-keyboard fa-2xl" style="color: #8b8c8d; font-size: 8em;"></span>
                     </div>
-                    <div class="">
+                    <div class="mt-4">
                         <h1 class="text-center" style="color: #8b8c8d; font-size: 6em;">Noted</h1>
                     </div>
                     <div>
