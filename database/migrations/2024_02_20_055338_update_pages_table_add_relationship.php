@@ -10,11 +10,9 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('folders', function (Blueprint $table) {
-            $table->id();
-            $table->string('folder_name');
-            $table->string('description')->nullable();
-            $table->timestamps();
+        Schema::table('pages', function (Blueprint $table) {
+            $table->unsignedBigInteger('folder_id');
+            $table->foreign('folder_id')->references('id')->on('folders');
         });
     }
 
@@ -23,6 +21,10 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('folders');
+        Schema::table('pages', function (Blueprint $table) {
+            //
+            $table->dropColumn('folder_id');
+            $table->dropForeign('folder_id');
+        });
     }
 };
