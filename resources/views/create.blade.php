@@ -6,7 +6,16 @@
                     <form method="post" action="{{ route('pages.store') }}" id="new_page_form" class="space-y-1">
                         @csrf
                         <div>
-                            <x-input-label for="title" class="mb-2 text-lg font-black" :value="__('Title')" />
+                            <x-input-label for="title" class="mb-2 text-lg font-black" :value="__('Folder')" />
+                            <select class="w-full mt-1 border-gray-300 rounded-md shadow-sm">
+                                <option id="-">No Folder</option>
+                                @foreach($folders as $folder)
+                                    <option></option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <x-input-label for="title" class="mt-2 mb-2 text-lg font-black" :value="__('Title')" />
                             <x-text-input id="title" name="title" type="text" class="block w-full mt-1 text-lg" :value="old('title')" required autofocus autocomplete="title" />
                             <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         </div>

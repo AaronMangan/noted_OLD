@@ -11,7 +11,7 @@ class Folder extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description'
+        'name', 'description', 'user_id'
     ];
 
     /**

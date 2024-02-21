@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class InitialDatabaseSeeder extends Seeder
 {
@@ -12,17 +13,17 @@ class InitialDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create the initial page.
-        // \App\Models\Page::create([
-        //     "title" => "Using Markdown",
-        //     "content" => "{$this->entryText()}",
-        //     "user_id" => 1,
-        // ]);
+        // User
+        $user = \App\Models\User::create([
+            'name' => 'Aaron Mangan',
+            'email' => 'azza.mangan@gmail.com',
+            'password' => Hash::make('azza.mangan@gmail.com'),
+        ]);
 
         \App\Models\Template::create([
             'name' => 'Simple',
-            'template' => "# Heading",
-            'user_id' => 1,
+            'template' => $this->entryText(),
+            'user_id' => $user->id,
         ]);
     }
 

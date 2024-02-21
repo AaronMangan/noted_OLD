@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Page;
+use App\Models\Folder;
 use App\Models\Template;
 use App\Models\Traits\FindByProperty;
 
@@ -52,6 +53,11 @@ class User extends Authenticatable
     public function pages()
     {
         return $this->hasMany(Page::class);
+    }
+
+    public function folders()
+    {
+        return $this->hasMany(Folder::class);
     }
 
     public function templates()

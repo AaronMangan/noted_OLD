@@ -20,13 +20,15 @@ class PageController extends Controller
         $search = $request->safe()->only('search')['search'] ?? '';
         return view(
             'dashboard',
-            ['pages' => \Auth::user()->pages()->where(function ($query) use ($search) {
-                return $query->where('title', 'like', "%{$search}%")
-                    ->orWhere("content", "like", "%{$search}%");
-            })->get(),
-            'search' => $search,
-            'shared' => \Auth::user()->shared(),
-        ]
+            [
+                'pages' => \Auth::user()->pages()->whereNull('folder_id')->where(function ($query) use ($search) {
+                    return $query->where('title', 'like', "%{$search}%")
+                        ->orWhere("content", "like", "%{$search}%");
+                })->get(),
+                'search' => $search,
+                'shared' => \Auth::user()->shared(),
+                'folders' => $this->folders($request),
+            ]
         );
     }
 
@@ -40,7 +42,8 @@ class PageController extends Controller
 
         //
         $templates = \Auth::user()->templates()->orderBy('name', 'asc')->get() ?? [];
-        return view('create', compact('templates', 'from'));
+        $folders = $this->folders($request);
+        return view('create', compact('templates', 'from', 'folders'));
     }
 
     /**
@@ -147,5 +150,11 @@ class PageController extends Controller
         }
 
         return redirect()->route('dashboard');
+    }
+
+    protected function folders($request)
+    {
+        //
+        $folders = $request->user()->folders()->with('pages')->get() ?? [];
     }
 }
